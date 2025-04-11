@@ -40,3 +40,29 @@ public:
         return attempts;
     }
 };
+
+class Player {
+private:
+    string name;
+    int bestScore;
+
+public:
+    Player(string playerName) {
+        name = playerName;
+        bestScore = INT_MAX;
+    }
+
+    void updateBestScore(int attempts) {
+        if (attempts < bestScore) {
+            bestScore = attempts;
+        }
+    }
+
+    void displayStats() {
+        cout << name << ", your best score is " << bestScore << " attempt(s)." << endl;
+    }
+
+    void finalDisplayStats() {
+        cout << name << ", your final best score is " << bestScore << " attempt(s)." << endl;
+    }
+};

@@ -5,24 +5,49 @@
 
 using namespace std;
 
-
-
 int main(){
     int maxRange;
+    string playerName;
+    char playAgain;
+
     cout << "Welcome to the Number Guessing Game!" << endl;
-    cout << "Enter the maximum number in the range (from 1 to ?): ";
-    cin >> maxRange;
+    cout << "Enter your name: ";
+    cin >> playerName;
 
-    NumberGuessingGame game(maxRange);
-    GameStatus status = Ongoing;
-    int userGuess;
+    Player player(playerName);
 
-    while (status == Ongoing) {
-        cout << "Enter your guess: ";
-        cin >> userGuess;
-        status = game.guess(userGuess);
-    }
+    do {
+        cout << "Enter the maximum number in the range (from 1 to ?): ";
+        cin >> maxRange;
 
-    cout << "Congratulations! You guessed the correct number in " << game.getAttempts() << " attempts." << endl;
+        NumberGuessingGame game(maxRange);
+        GameStatus status = Ongoing;
+        int userGuess;
+
+        while (status == Ongoing) {
+            cout << "Enter your guess: ";
+            cin >> userGuess;
+            status = game.guess(userGuess);
+        }
+    
+        int attempts = game.getAttempts();
+        cout << "Congratulations! You guessed the correct number in " << game.getAttempts() << " attempts." << endl;
+
+
+        player.updateBestScore(attempts);
+        player.displayStats();
+
+        cout << "\nWould you like to play again? (y/n): ";
+        cin >> playAgain;
+
+    } 
+    
+    while (playAgain == 'y' || playAgain == 'Y');
+
+    cout << "\nThanks for playing, ";
+    player.finalDisplayStats();
+
     return 0;
 }
+
+
